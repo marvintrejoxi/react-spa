@@ -1,17 +1,23 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
-import Header from './Header';
+import { Route, Redirect } from 'react-router-dom'
+import store from '../../store'
 
 const SiteLayout = ({component: Component, ...rest}) => {
   return (
     <Route {...rest} render={matchProps => (
-      <div className="SiteLayout">
-        <div className="Header">
-          <Header />
-        </div>
+      store.getState().data.auth.authorize ? (
+        <div className="SiteLayout">
+          <div className="Header">
+            HEADER
+          </div>
           <Component {...matchProps} />
-        <div className="Footer">Footer</div>
-      </div>
+          <div className="Footer">
+            FOOTER
+          </div>
+        </div>
+      ) : (
+        <Redirect to="/"/>
+      )
     )} />
   )
 };

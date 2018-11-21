@@ -1,13 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store'
-
 import SiteLayout from './pages/components/SiteLayout';
 
 // PAGES
-import Home from './pages/containers/Home';
-import About from './pages/containers/About';
+import Login from './pages/containers/users/Login';
+import Posts from './pages/containers/users/Posts';
 
 class App extends Component {
   render(){
@@ -15,8 +14,8 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Fragment>
-            <SiteLayout exact path='/' component={Home} />
-            <SiteLayout exact path='/about' component={About} />
+            <Route exact path='/' component={Login} />
+            <SiteLayout exact path='/posts' component={Posts} />
           </Fragment>
         </BrowserRouter>
       </Provider>

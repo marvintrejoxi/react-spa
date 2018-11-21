@@ -1,8 +1,12 @@
-import { createStore } from 'redux';
-import reducers from './reducers';
+import { compose, createStore } from 'redux';
+import reducers from './reducers/users';
+import persistState from 'redux-store-sessionstorage';
 
-
-export default createStore(
-  reducers, 
+const enhancer = compose(
+  persistState(),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+const store = createStore(reducers, enhancer);
+
+export default store;
